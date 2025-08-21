@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALB Conseil - Transformation Financière</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2D2D2D;
+            --secondary-color: #00A6A3;
+            --tertiary-warm: #F8F8F8;
+            --tertiary-light: #E5E7EB;
+            --white: #FFFFFF;
+            --text-light: #6B7280;
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #00A6A3 0%, #008A87 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-color);
+            overflow-x: hidden;
+            background: #fafbfc;
+        }
+
+        .modern-font {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Glassmorphism utilities */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+
+        .glass-dark {
+            background: rgba(45, 45, 45, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(45, 45, 45, 0.1);
+            border-radius: 20px;
+        }
+
+        /* Download Button */
+        .download-btn {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            z-index: 9999;
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 8px 32px rgba(0, 166, 163, 0.3);
+            backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 166, 163, 0.4);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 20px 0;
+        }
+
+        .header-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+            background: rgba(0, 166, 163, 0.1);
+        }
+
+        .cta-nav {
+            background: var(--gradient-secondary) !important;
+            color: white !important;
+            padding: 12px 24px !important;
+            border-radius: 25px !important;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 166, 163, 0.3);
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 166, 163, 0.4);
+        }
+
+        /* Background Elements */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(0, 166, 163, 0.1), rgba(0, 138, 135, 0.05));
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .bg-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            left: 10%;
+            animation-delay: -10s;
+        }
+
+        .bg-circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: 50%;
+            animation-delay: -15s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 120px 5% 60px;
+            background: linear-gradient(135deg, #fafbfc 0%, #f0f9ff 50%, #fafbfc 100%);
+        }
+
+        .hero-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text .highlight {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero-text .tagline {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .hero-text .mission {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--gradient-secondary);
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 166, 163, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            color: var(--primary-color);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 12px 40px rgba(0, 166, 163, 0.4);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            text-align: center;
+            min-width: 120px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            display: block;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .visual-main {
+            width: 450px;
+            height: 450px;
+            background: var(--gradient-secondary);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 166, 163, 0.3);
+            transform: rotate(5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .visual-main:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .visual-content {
+            color: white;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .visual-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .visual-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Floating cards around main visual */
+        .floating-card {
+            position: absolute;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-card:nth-child(2) {
+            top: 0;
+            right: -20px;
+            animation-delay: -1s;
+        }
+
+        .floating-card:nth-child(3) {
+            bottom: 20px;
+            left: -30px;
+            animation-delay: -3s;
+        }
+
+        .floating-card:nth-child(4) {
+            top: 30%;
+            right: -50px;
+            animation-delay: -4s;
+        }
+
+        /* Section Separator */
+        .section-separator {
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 166, 163, 0.05), transparent);
+            position: relative;
+        }
+
+        /* Values Section */
+        .values {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%);
+            position: relative;
+        }
+
+        .values::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(0, 166, 163, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 166, 163, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .values-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .value-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            padding: 3rem 2.5rem;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+            border-radius: 25px 25px 0 0;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 166, 163, 0.15);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 166, 163, 0.3);
+        }
+
+        .value-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .value-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Expertise Section */
+        .expertise {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, #fafbfc 0%, #f8fafc 100%);
+            position: relative;
+        }
+
+        .expertise-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .expertise-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .expertise-content p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .expertise-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .expertise-list li {
+            padding: 1.5rem 2rem;
+            margin-bottom: 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            font-size: 1.1rem;
+            position: relative;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .expertise-list li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 32px rgba(0, 166, 163, 0.1);
+        }
+
+        .expertise-visual {
+            position: relative;
+            padding: 3rem;
+        }
+
+        .expertise-main-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 166, 163, 0.1);
+        }
+
+        .expertise-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            box-shadow: 0 12px 40px rgba(0, 166, 163, 0.3);
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .data-point {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .data-point:hover {
+            transform: scale(1.05);
+        }
+
+        .data-point .number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            display: block;
+        }
+
+        .data-point .label {
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #e0f2fe 100%);
+            position: relative;
+        }
+
+        .team-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .team-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 166, 163, 0.15);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 12px 40px rgba(0, 166, 163, 0.3);
+        }
+
+        .team-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 30% 20%, rgba(0, 166, 163, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 166, 163, 0.1) 0%, transparent 50%);
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 5% 2rem;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 2;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .expertise-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .visual-main {
+                width: 320px;
+                height: 320px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .values-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="bg-elements">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+
+
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <a href="#" class="logo">ALB Conseil</a>
+            <ul class="nav-links">
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#valeurs">Valeurs</a></li>
+                <li><a href="#equipe">Équipe</a></li>
+                <li><a href="#carrières" class="cta-nav">Rejoindre l'équipe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text slide-in-left">
+                <h1>
+                    <span class="highlight">Transmettre</span> &<br>
+                    <span class="highlight">Transformer</span><br>
+                    la Finance
+                </h1>
+                <p class="tagline">Cabinet de conseil indépendant spécialisé dans la transformation financière des institutions les plus exigeantes</p>
+                <div class="mission glass">
+                    <strong>Notre mission :</strong> Accompagner les institutions financières dans leur adaptation aux attentes complexes des sociétés contemporaines, avec pragmatisme, bienveillance et excellence.
+                </div>
+                <div class="hero-cta">
+                    <a href="#expertise" class="btn btn-primary">Découvrir notre expertise ✨</a>
+                    <a href="#carrières" class="btn btn-secondary">Nous rejoindre 🚀</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">90</span>
+                        <span class="stat-label">Collaborateurs</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">35</span>
+                        <span class="stat-label">Ans d'âge moyen</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">94/100</span>
+                        <span class="stat-label">Indice égalité F/H</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual slide-in-right">
+                <div class="visual-main">
+                    <div class="visual-icon">💼</div>
+                    <div class="visual-content">
+                        <h3>Excellence</h3>
+                        <p>Transformation par la clarté</p>
+                    </div>
+                </div>
+                <div class="floating-card">
+                    <div style="color: var(--secondary-color); font-weight: 600;">🎯 Pragmatisme</div>
+                </div>
+                <div class="floating-card">
+                    <div style="color: var(--secondary-color); font-weight: 600;">🤝 Bienveillance</div>
+                </div>
+                <div class="floating-card">
+                    <div style="color: var(--secondary-color); font-weight: 600;">🚀 Innovation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Values Section -->
+    <section class="values" id="valeurs">
+        <div class="values-container fade-in">
+            <div class="section-header">
+                <h2>Nos Valeurs Fondamentales</h2>
+                <p class="subtitle">Une approche humaine et moderne au service de la transformation financière</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Bienveillance & Solidarité</h3>
+                    <p>Nous privilégions une approche humaine et collaborative, créant un environnement de confiance mutuelle où chaque talent peut s'épanouir.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>Pragmatisme & Éthique</h3>
+                    <p>Solutions concrètes et durables, guidées par nos principes éthiques et notre sens des responsabilités envers nos clients et partenaires.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔍</div>
+                    <h3>Curiosité & Adaptation</h3>
+                    <p>Innovation permanente et capacité d'adaptation face aux défis évolutifs du secteur financier en constante transformation.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⚡</div>
+                    <h3>Excellence & Résultat</h3>
+                    <p>Engagement vers l'excellence opérationnelle avec une culture du résultat et du service client qui fait notre réputation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Expertise Section -->
+    <section class="expertise" id="expertise">
+        <div class="expertise-container">
+            <div class="expertise-content slide-in-left">
+                <h2>Notre Expertise</h2>
+                <p>Nous accompagnons les grandes institutions financières dans leurs projets de transformation les plus stratégiques et complexes.</p>
+                <ul class="expertise-list">
+                    <li>🔄 Transformation digitale et systèmes d'information</li>
+                    <li>⚙️ Optimisation des processus opérationnels</li>
+                    <li>📋 Conformité réglementaire et gestion des risques</li>
+                    <li>🔀 Conduite du changement organisationnel</li>
+                    <li>💡 Innovation produits et services financiers</li>
+                    <li>📊 Analytics et intelligence des données</li>
+                </ul>
+            </div>
+            <div class="expertise-visual slide-in-right">
+                <div class="expertise-main-card">
+                    <div class="expertise-icon">📈</div>
+                    <h3 class="modern-font">Notre Impact</h3>
+                    <div class="data-grid">
+                        <div class="data-point">
+                            <div class="number">9</div>
+                            <div class="label">Années d'expérience moyenne</div>
+                        </div>
+                        <div class="data-point">
+                            <div class="number">100+</div>
+                            <div class="label">Projets transformés</div>
+                        </div>
+                        <div class="data-point">
+                            <div class="number">55%</div>
+                            <div class="label">Équipe féminine</div>
+                        </div>
+                        <div class="data-point">
+                            <div class="number">15+</div>
+                            <div class="label">Années d'expertise</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Team Section -->
+    <section class="team" id="equipe">
+        <div class="team-container fade-in">
+            <div class="section-header">
+                <h2>Une Équipe d'Excellence</h2>
+                <p class="subtitle">Des professionnels passionnés par l'innovation et l'excellence dans la transformation financière</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">TD</div>
+                    <h3>Thibault Durand</h3>
+                    <div class="team-role">Directeur Associé</div>
+                    <p class="team-description">Expert en transformation digitale avec 15+ années d'expérience dans le secteur financier. Spécialisé dans l'accompagnement stratégique des grandes institutions.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">JD</div>
+                    <h3>Jean-David Martin</h3>
+                    <div class="team-role">Directeur Associé</div>
+                    <p class="team-description">Spécialiste de la conduite du changement et de l'optimisation des processus. Reconnu pour son approche pragmatique et bienveillante.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👥</div>
+                    <h3>Notre Équipe</h3>
+                    <div class="team-role">Consultants & Experts</div>
+                    <p class="team-description">Une équipe de 88 consultants passionnés, avec une moyenne d'âge de 35 ans et 9 années d'expérience moyenne. 55% de femmes dans un secteur traditionnellement masculin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="carrières">
+        <div class="cta-content fade-in">
+            <h2>Rejoignez Notre Aventure</h2>
+            <p>Nous recherchons des talents passionnés pour contribuer à la transformation du secteur financier dans un environnement stimulant, bienveillant et formateur.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Découvrir nos offres 🎯</a>
+                <a href="#" class="btn cta-glass">Candidature spontanée ✨</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ALB Conseil</h3>
+                <p>Cabinet de conseil indépendant spécialisé dans la transformation financière des institutions les plus exigeantes.</p>
+                <p><strong>📍 Paris, France</strong></p>
+                <p><strong>👥 90 collaborateurs</strong></p>
+                <p><strong>🏆 94/100 indice égalité F/H</strong></p>
+            </div>
+            <div class="footer-section">
+                <h3>Nos Services</h3>
+                <a href="#">🔄 Transformation Digitale</a><br>
+                <a href="#">⚙️ Optimisation Processus</a><br>
+                <a href="#">📋 Conformité Réglementaire</a><br>
+                <a href="#">🔀 Conduite du Changement</a><br>
+                <a href="#">💡 Innovation Financière</a><br>
+                <a href="#">📊 Analytics & Data</a>
+            </div>
+            <div class="footer-section">
+                <h3>Carrières</h3>
+                <a href="#">🎯 Offres d'emploi</a><br>
+                <a href="#">🎓 Stage & Alternance</a><br>
+                <a href="#">✨ Candidature spontanée</a><br>
+                <a href="#">🤝 Processus de recrutement</a><br>
+                <a href="#">💼 Avantages & Culture</a><br>
+                <a href="#">📈 Évolution de carrière</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📧 <strong>Email:</strong> contact@albconseil.fr</p>
+                <p>📞 <strong>Tél:</strong> +33 1 XX XX XX XX</p>
+                <p>🌐 <strong>LinkedIn:</strong> ALB Conseil</p>
+                <p>🏢 <strong>Adresse:</strong> Paris, Île-de-France</p>
+                <p>⏰ <strong>Horaires:</strong> Lun-Ven 9h-18h</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ALB Conseil. Tous droits réservés. | Mentions légales | Politique de confidentialité | RGPD</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('header-glass');
+            } else {
+                header.classList.remove('header-glass');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Floating animation for background circles
+        const circles = document.querySelectorAll('.bg-circle');
+        circles.forEach((circle, index) => {
+            circle.style.animationDelay = `${index * 5}s`;
+        });
+
+        // Interactive hover effects
+        document.querySelectorAll('.value-card, .team-card, .stat').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero-visual');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Dynamic stats counter animation
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.textContent);
+                let current = 0;
+                const increment = target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(current) + (stat.textContent.includes('/') ? '/100' : '');
+                }, 20);
+            });
+        }
+
+        // Trigger stats animation when section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) {
+            statsObserver.observe(heroStats);
+        }
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
